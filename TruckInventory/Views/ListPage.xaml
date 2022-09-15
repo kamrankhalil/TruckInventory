@@ -50,6 +50,7 @@
 
             <!--  Listview for truck inventory, uses same template as header  -->
             <ListView
+                BackgroundColor="White"
                 IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
                 ItemSelected="ListView_ItemSelected"
                 ItemsSource="{Binding Trucks}">
