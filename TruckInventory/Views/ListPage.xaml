@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TruckInventory.Views.ListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:TruckInventory.Resources;assembly=TruckInventory"
+    xmlns:views="clr-namespace:TruckInventory.Views;assembly=TruckInventory"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="RootView"
+    Title="{x:Static resources:AppResources.TRUCKS}"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--  First two converters used from Xamarin Community Toolkit  -->
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <!--  Used StackLayout here to stack list, header and top button layout. Item template for list and header uses Grid Layout.  -->
+        <StackLayout Padding="5,0">
+            <ActivityIndicator
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Visual="Material"
+                Color="CadetBlue" />
+            <!--  Button to add new trucks  -->
+            <Button
+                Margin="15,10"
+                BackgroundColor="CadetBlue"
+                Command="{Binding AddTruckCommand}"
+                IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                Text="{x:Static resources:AppResources.ADD_TRUCK}"
+                Visual="Material" />
+
+            <!--  Header for truck inventory list  -->
+            <Frame
+                BackgroundColor="LightYellow"
+                IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                Visual="Material">
+                <views:TruckItemTemplate
+                    Action="{x:Static resources:AppResources.ACTIONS}"
+                    IsAvailable="{x:Static resources:AppResources.AVAILABLE}"
+                    IsHeader="True"
+                    License="{x:Static resources:AppResources.ID}"
+                    Make="{x:Static resources:AppResources.MAKE}"
+                    PurchaseDate="{x:Static resources:AppResources.PURCHASE_DATE}"
+                    VerticalOptions="FillAndExpand" />
+            </Frame>
+
+            <!--  Listview for truck inventory, uses same template as header  -->
+            <ListView
+                IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                ItemSelected="ListView_ItemSelected"
+                ItemsSource="{Binding Trucks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <views:TruckItemTemplate
+                                Action="{x:Static resources:AppResources.EDIT_OR_DELETE}"
+                                ActionCommand="{Binding Source={x:Reference RootView}, Path=BindingContext.ItemActionCommand}"
+                                License="{Binding License}"
+                                Make="{Binding Manufacturer}"
+                                PurchaseDate="{Binding PurchaseDate, StringFormat='{0:yyyy/MM/dd}'}">
+
+                                <!--  Triggers to show Yes/No text based on IsAvailable flag  -->
+                                <views:TruckItemTemplate.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsAvailable}"
+                                        TargetType="views:TruckItemTemplate"
+                                        Value="True">
+                                        <Setter Property="IsAvailable" Value="{x:Static resources:AppResources.YES}" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsAvailable}"
+                                        TargetType="views:TruckItemTemplate"
+                                        Value="False">
+                                        <Setter Property="IsAvailable" Value="{x:Static resources:AppResources.NO}" />
+                                    </DataTrigger>
+                                </views:TruckItemTemplate.Triggers>
+                            </views:TruckItemTemplate>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

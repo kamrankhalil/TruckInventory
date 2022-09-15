@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TruckInventory.Views.AddEditPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:TruckInventory.Converters"
+    xmlns:resources="clr-namespace:TruckInventory.Resources;assembly=TruckInventory"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resources:AppResources.TRUCK_DETAIL}"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--  First two converters used from Xamarin Community Toolkit  -->
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+
+            <!--  Used StackLayout here as views are all vertically stacked, grid and other layouts can also be used.  -->
+            <StackLayout Padding="20">
+
+                <!--  Picker for truck manufacturer input, along with error label  -->
+                <Label
+                    FontSize="Small"
+                    Text="{x:Static resources:AppResources.MAKE}"
+                    TextColor="Black" />
+                <Picker
+                    BackgroundColor="Ivory"
+                    ItemsSource="{Binding ManufacturerList}"
+                    SelectedItem="{Binding Manufacturer.Value}"
+                    Visual="Material" />
+                <Label
+                    FontSize="Small"
+                    IsVisible="{Binding Manufacturer.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                    Text="{Binding Manufacturer.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    TextColor="Red" />
+
+                <!--  Entry for truck license/ID input, along with error label  -->
+                <Label
+                    Padding="0,20,0,0"
+                    FontSize="Small"
+                    Text="{x:Static resources:AppResources.TRUCK_ID}"
+                    TextColor="Black" />
+                <Entry
+                    BackgroundColor="Ivory"
+                    MaxLength="6"
+                    Placeholder="{x:Static resources:AppResources.MAX_6_CHARACTERS}"
+                    Text="{Binding License.Value}"
+                    Visual="Material" />
+                <Label
+                    FontSize="Small"
+                    IsVisible="{Binding License.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                    Text="{Binding License.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    TextColor="Red" />
+
+                <!--  Layout for Availability Checkbox  -->
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label
+                        FontSize="Small"
+                        Text="{x:Static resources:AppResources.IS_AVAILABLE}"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox
+                        HorizontalOptions="EndAndExpand"
+                        IsChecked="{Binding IsAvailable.Value}"
+                        Visual="Material" />
+                </StackLayout>
+
+                <!--  Date picker for purchase date input  -->
+                <Label
+                    Padding="0,20,0,0"
+                    FontSize="Small"
+                    Text="{x:Static resources:AppResources.PURCHASE_DATE}"
+                    TextColor="Black" />
+                <DatePicker
+                    BackgroundColor="Ivory"
+                    Date="{Binding PurchaseDate.Value}"
+                    MinimumDate="{Binding MinimumPurchaseDate}"
+                    Visual="Material" />
+
+                <!--  Button for Adding Photo  -->
+                <Button
+                    Margin="0,20,0,0"
+                    BackgroundColor="DeepSkyBlue"
+                    Command="{Binding AddPhotoCommand}"
+                    Text="{x:Static resources:AppResources.ADD_PHOTO}"
+                    Visual="Material" />
+
+                <!--  Frame to show added picture  -->
+                <Frame
+                    Margin="0,20,0,0"
+                    BorderColor="Black"
+                    IsVisible="{Binding Photo.Value, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                    Visual="Material">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="100"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding Photo.Value}"
+                        VerticalOptions="Center" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DeletePhotoCommand}" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!--  Save button to persist user input  -->
+                <Button
+                    Margin="0,20,0,0"
+                    BackgroundColor="CadetBlue"
+                    Command="{Binding SaveCommand}"
+                    Text="{x:Static resources:AppResources.SAVE}"
+                    Visual="Material" />
+
+                <!--  Cancel button to close page  -->
+                <Button
+                    Margin="0,20,0,0"
+                    BackgroundColor="Gray"
+                    Command="{Binding CancelCommand}"
+                    Text="{x:Static resources:AppResources.CANCEL}"
+                    Visual="Material" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="TruckInventory.Views.TruckItemTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="TruckItemRootView">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!--  Allocated percentage width to all elements to create a uniform grid structure  -->
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.25*" />
+        <ColumnDefinition Width="0.15*" />
+        <ColumnDefinition Width="0.15*" />
+        <ColumnDefinition Width="0.25*" />
+        <ColumnDefinition Width="0.2*" />
+    </Grid.ColumnDefinitions>
+
+    <!--  Label for Truck Manufacturer  -->
+    <Label
+        Grid.Column="0"
+        HorizontalOptions="Center"
+        Text="{Binding Source={x:Reference TruckItemRootView}, Path=Make}"
+        TextColor="Black"
+        VerticalOptions="Center">
+        <Label.Triggers>
+            <!--  Data trigger used to show bold style if template is header  -->
+            <DataTrigger
+                Binding="{Binding Source={x:Reference TruckItemRootView}, Path=IsHeader}"
+                TargetType="Label"
+                Value="True">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </DataTrigger>
+        </Label.Triggers>
+    </Label>
+
+    <!--  Label for Truck ID  -->
+    <Label
+        Grid.Column="1"
+        HorizontalOptions="Center"
+        Text="{Binding Source={x:Reference TruckItemRootView}, Path=License}"
+        TextColor="Black"
+        VerticalOptions="Center">
+        <Label.Triggers>
+            <DataTrigger
+                Binding="{Binding Source={x:Reference TruckItemRootView}, Path=IsHeader}"
+                TargetType="Label"
+                Value="True">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </DataTrigger>
+        </Label.Triggers>
+    </Label>
+
+    <!--  Label for Availability  -->
+    <Label
+        Grid.Column="2"
+        HorizontalOptions="Center"
+        Text="{Binding Source={x:Reference TruckItemRootView}, Path=IsAvailable}"
+        TextColor="Black"
+        VerticalOptions="Center">
+        <Label.Triggers>
+            <DataTrigger
+                Binding="{Binding Source={x:Reference TruckItemRootView}, Path=IsHeader}"
+                TargetType="Label"
+                Value="True">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </DataTrigger>
+        </Label.Triggers>
+    </Label>
+
+    <!--  Label for Purchase Date  -->
+    <Label
+        Grid.Column="3"
+        HorizontalOptions="Center"
+        Text="{Binding Source={x:Reference TruckItemRootView}, Path=PurchaseDate}"
+        TextColor="Black"
+        VerticalOptions="Center">
+        <Label.Triggers>
+            <DataTrigger
+                Binding="{Binding Source={x:Reference TruckItemRootView}, Path=IsHeader}"
+                TargetType="Label"
+                Value="True">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </DataTrigger>
+        </Label.Triggers>
+    </Label>
+
+    <!--  Label for Action column  -->
+    <Label
+        Grid.Column="4"
+        HorizontalOptions="Center"
+        Text="{Binding Source={x:Reference TruckItemRootView}, Path=Action}"
+        TextColor="Black"
+        VerticalOptions="Center">
+        <Label.Triggers>
+            <DataTrigger
+                Binding="{Binding Source={x:Reference TruckItemRootView}, Path=IsHeader}"
+                TargetType="Label"
+                Value="True">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </DataTrigger>
+        </Label.Triggers>
+
+        <!--  Tap gesture, command for edit or delete actions  -->
+        <Label.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Source={x:Reference TruckItemRootView}, Path=ActionCommand}" CommandParameter="{Binding .}" />
+        </Label.GestureRecognizers>
+    </Label>
+</Grid>
