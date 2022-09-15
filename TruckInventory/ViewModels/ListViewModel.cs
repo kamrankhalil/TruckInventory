@@ -94,7 +94,7 @@ namespace TruckInventory.ViewModels
             }
         }
 
-        public async void OnAppearing()
+        public void OnAppearing()
         {
             //empty
         }
@@ -104,7 +104,7 @@ namespace TruckInventory.ViewModels
             await LoadItems();
         }
 
-        public async void OnNavigatedFrom(INavigationParameters parameters)
+        public void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
 

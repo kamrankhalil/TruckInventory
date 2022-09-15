@@ -82,7 +82,9 @@ namespace TruckInventory.ViewModels
 
         private bool IsFormValid()
         {
-            //Calling validate separately on both to return errors on UI, otherwise statement will just end after first false validation
+            //Calling validate separately on both to return errors on UI, otherwise statement will just end after first false validation.
+            //Validation is intentionally added only these 2 fields.
+
             var isManufacturerValid = Manufacturer.Validate();
             var isLicenseValid = License.Validate();
 

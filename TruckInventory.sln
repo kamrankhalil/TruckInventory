@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckInventory.iOS", "Truck
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckInventory", "TruckInventory\TruckInventory.csproj", "{A2EB39F5-E2A0-418E-B3C8-B2912524AE65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckInventory.Tests", "TruckInventory.Tests\TruckInventory.Tests.csproj", "{C0A6B621-C466-4F20-ABE6-065676069C63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{A2EB39F5-E2A0-418E-B3C8-B2912524AE65}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{A2EB39F5-E2A0-418E-B3C8-B2912524AE65}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{A2EB39F5-E2A0-418E-B3C8-B2912524AE65}.Release|iPhone.Build.0 = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C0A6B621-C466-4F20-ABE6-065676069C63}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
